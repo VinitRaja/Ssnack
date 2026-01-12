@@ -23,7 +23,7 @@ public class ItemRepository implements JpaRepositoty<Item, String> {
   }
   public List<Item> saveAll(List<Item> items, Iterable<Item> entities){
     for(Item e : entities){
-      save(items, e)
+      save(items, e);
     }
     return new ArrayList<>(items);
   }

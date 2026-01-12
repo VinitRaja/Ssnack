@@ -63,7 +63,7 @@ public class UserController{
   public ResponseEntity<Void> removeItem(@PathVariable String userId, @PathVariable String itemId){
     try {
       boolean removed = userService.removeItem(userId, itemId);
-      returned removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+      return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     } catch (IllegalArgumentException e) {
       return ResponseEntity.notFound().build();
     }

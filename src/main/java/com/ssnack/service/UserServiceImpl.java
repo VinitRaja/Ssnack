@@ -33,9 +33,10 @@ public interface UserServiceImpl{
     return getItemRepository().findAllForUser(user.getItems());
   }
   default Item addItem(String userId, String itemName){
-    User user = getUserRepository().findById(userId).orElseThrow(() -> new IllegalArgumentException("User not Found"));
+    User user = getUserRepository().findById(userId)
+                                    .orElseThrow(() -> new IllegalArgumentException("User not Found"));
     if (user.getItems().size() > MAX_ITEMS){
-      throw new IllegalStateException("User already has maximum of " + MAX_ITEMS + " items"));
+      throw new IllegalStateException("User already has maximum of " + MAX_ITEMS + " items");
     }
     Item item = new Item(itemName);
     return getItemRepository().addForUser(user.getItems(), item);
@@ -48,7 +49,7 @@ public interface UserServiceImpl{
     User seller = getUserRepository().findById(sellerUserId).orElseThrow(() -> new IllegalArgumentException("Seller not Found"));
     User buyer = getUserRepository().findById(buyerUserId).orElseThrow(() -> new IllegalArgumentException("Buyer not Found"));
     if (buyer.getItems().size() >= MAX_ITEMS){
-      throw new IllegalStateException("Buyer already has maximum of " + MAX_ITEMS + " items"));
+      throw new IllegalStateException("Buyer already has maximum of " + MAX_ITEMS + " items");
     }
     Item item = getItemRepository().findByIdForUser(seller.getItems(), itemId).orElseThrow(() -> new IllegalArgumentException("Items not Found"));
     boolean removed = getItemRepository().deleteForUser(seller.getItems(), itemId);
@@ -64,7 +65,7 @@ public interface UserServiceImpl{
     User lender = getUserRepository().findById(lenderUserId).orElseThrow(() -> new IllegalArgumentException("Lender not Found"));
     User borrower = getUserRepository().findById(borrowerUserId).orElseThrow(() -> new IllegalArgumentException("Borrower not Found"));
     if (borrower.getItems().size() >= MAX_ITEMS){
-      throw new IllegalStateException("borrower already has maximum of " + MAX_ITEMS + " items"));
+      throw new IllegalStateException("borrower already has maximum of " + MAX_ITEMS + " items");
     }
     Item lenderItem = getItemRepository().findByIdForUser(lender.getItems(), itemId).orElseThrow(() -> new IllegalArgumentException("Items not Found for lender"));
     Item borrowedVopy = new Item(lenderItem.getName());
@@ -85,7 +86,7 @@ public interface UserServiceImpl{
     User borrower = getUserRepository().findById(borrowerUserId).orElseThrow(() -> new IllegalArgumentException("Lender not Found"));
     User buyer = getUserRepository().findById(buyerUserId).orElseThrow(() -> new IllegalArgumentException("Lender not Found"));
     if (buyer.getItems().size() >= MAX_ITEMS){
-      throw new IllegalStateException("borrower already has maximum of " + MAX_ITEMS + " items"));
+      throw new IllegalStateException("borrower already has maximum of " + MAX_ITEMS + " items");
     }
     Item borrowedItem = getItemRepository().findByIdForUser(borrower.getItems(), borrowedItemId).orElseThrow(() -> new IllegalArgumentException("Borrowed Items not Found"));
     if (!borrowedItem.isBorrowed()){

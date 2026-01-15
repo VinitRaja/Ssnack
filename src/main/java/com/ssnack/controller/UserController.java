@@ -62,8 +62,8 @@ public class UserController{
   @DeleteMapping("/{userId}/items/{itemId}")
   public ResponseEntity<Void> removeItem(@PathVariable String userId, @PathVariable String itemId){
     try {
-      boolean removed = userService.removeItem(userId, itemId);
-      return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+      boolean deleted = userService.removeItem(userId, itemId);
+      return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     } catch (IllegalArgumentException e) {
       return ResponseEntity.notFound().build();
     }
@@ -89,7 +89,7 @@ public class UserController{
   @PostMapping("/{borrowerId}/return/{borrowItemId}")
   public ResponseEntity<Void> returnBorrowItem (@PathVariable String borrowerId, @PathVariable String borrowedItemId){
     try{
-      bolean ok = userService.returnBorrowedItem(borrowerId, borrowedItemId);
+      boolean ok = userService.returnBorrowedItem(borrowerId, borrowedItemId);
       return ok ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     } catch (IllegalArgumentException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

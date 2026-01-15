@@ -20,13 +20,15 @@ public class Item {
   public boolean isBorrowed() { return borrowed; }
   public String getBorrowedFromUserId() { return borrowedFromUserId; }
   public String getSourceItemId() { return sourceItemId; }
-  
+
+  public void setSourceItemId(String sourceItemId) {
+    this.sourceItemId = sourceItemId;  }
   public void setName(String name) { this.name = name; }
   public void setBorrowed(boolean borrowed) { this.borrowed = borrowed; }
   public void setBorrowedFromUserId(String borrowedFromUserId) { this.borrowedFromUserId = borrowedFromUserId; }
   
   @Override
-  public static boolean equals(Object o) {
+  public boolean equals(Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       Item that = (Item) o;
@@ -34,7 +36,7 @@ public class Item {
     }
   
   @Override
-  public static int hashCode() {
+  public int hashCode() {
     return Objects.hash(id, sourceItemId);
     }
 }

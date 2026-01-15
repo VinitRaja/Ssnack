@@ -4,7 +4,7 @@ import com.ssnack.model.User;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserRepository implements JpaRepository<User, String>{
+public class UserRepository {
   private final Map<String, User> store = new ConcurrentHashMap<>();
   public List <User> findAll(){
     return new ArrayList<>(store.values());

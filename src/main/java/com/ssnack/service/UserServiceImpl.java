@@ -77,7 +77,7 @@ public interface UserServiceImpl{
   }
   default boolean returnBorrowedItem(String borrowerUserId, String borrowedItemId){
     User borrower = getUserRepository().findById(borrowerUserId).orElseThrow(() -> new IllegalArgumentException("Lender not Found"));
-    User borrowedItem = getItemRepository().findByIdForUser(borrower.getItems(), borrowedItemId).orElseThrow(() -> new IllegalArgumentException("Borrowed Items not Found"));
+    Item borrowedItem = getItemRepository().findByIdForUser(borrower.getItems(), borrowedItemId).orElseThrow(() -> new IllegalArgumentException("Borrowed Items not Found"));
     if (!borrowedItem.isBorrowed()){
       throw new IllegalStateException("Item is not marked as borrowed");
     }

@@ -26,6 +26,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
               .allowedOrigins(allowedOrigins)
               .allowedMethods(allowedMethods)
               .allowedHeaders(allowedHeaders)
-              .allowedCredentials(Boolean.parseBoolean(allowedCredentials));
+              .allowedCredentials(allowedCredentials);
     }
   }

@@ -4,8 +4,8 @@ import com.ssnack.model.Item;
 import com.ssnack.model.User;
 import com.ssnack.repository.ItemRepository;
 import com.ssnack.repository.UserRepository;
-import java.Util.List;
-import java.Util.Optional;
+import java.util.List;
+import java.util.Optional;
 
 public interface UserServiceImpl{
   int MAX_ITEMS = 10;
@@ -22,7 +22,8 @@ public interface UserServiceImpl{
     return getUserRepository().findById(id).filter(u -> u.getName() != null && u.getName().equals(name));
   }
   default User createUser(String name){
-    User user = new User(name);
+    User user = new User();
+    user.setName(name);
     return getUserRepository().save(user);
   }
   default boolean deleteUser(String id){
@@ -68,7 +69,7 @@ public interface UserServiceImpl{
       throw new IllegalStateException("borrower already has maximum of " + MAX_ITEMS + " items");
     }
     Item lenderItem = getItemRepository().findByIdForUser(lender.getItems(), itemId).orElseThrow(() -> new IllegalArgumentException("Items not Found for lender"));
-    Item borrowedVopy = new Item(lenderItem.getName());
+    Item borrowedCopy = new Item(lenderItem.getName());
     borrowedCopy.setBorrowed(true);
     borrowedCopy.setBorrowedFromUserId(lender.getId());
     borrowedCopy.setSourceItemId(lenderItem.getId());

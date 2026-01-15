@@ -83,7 +83,7 @@ public class UserController{
       Item item = userService.borrowItem(lenderId, itemId, borrowerId);
       return new ResponseEntity<>(item, HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available & quantity is" + null);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available: " + e.getMessage());
     }
   }
   @PostMapping("/{borrowerId}/return/{borrowItemId}")
@@ -101,7 +101,7 @@ public class UserController{
       Item item = userService.sellBorrowedItem(borrowerId, borrowedItemId, buyerId);
       return new ResponseEntity<>(item, HttpStatus.OK);
     } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available" + null);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available: " + e.getMessage());
     }
   }
   public record CreateUserRequest(String name){}

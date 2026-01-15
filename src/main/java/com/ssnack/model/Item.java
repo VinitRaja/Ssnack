@@ -11,7 +11,7 @@ public class Item {
   private String sourceItemId;
 
   public Item(String name) {
-    this.id = UUID.randomUUID.toString();
+    this.id = UUID.randomUUID().toString();
     this.name = name;
     }
 
@@ -26,16 +26,15 @@ public class Item {
   public void setBorrowedFromUserId(String borrowedFromUserId) { this.borrowedFromUserId = borrowedFromUserId; }
   
   @Override
-  public boolean equals(Object o) {
+  public static boolean equals(Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
-      Item that = (YourClassName) o;
-      return equals(id, that.id) && 
-             equals(sourceItemId, that.sourceItemId);
+      Item that = (Item) o;
+      return Objects.equals(id, that.id) && Objects.equals(sourceItemId, that.sourceItemId);
     }
   
   @Override
-  public int hashCode() {
-      return hash(id, sourceItemId);
+  public static int hashCode() {
+    return Objects.hash(id, sourceItemId);
     }
 }

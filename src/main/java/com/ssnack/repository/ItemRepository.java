@@ -3,7 +3,7 @@ package com.ssnack.repository;
 import com.ssnack.model.Item;
 import java.util.*;
 
-public class ItemRepository implements JpaRepositoty<Item, String> {
+public class ItemRepository implements JpaRepository<Item, String> {
   public List <Item> findAllForUser(List<Item> items){
     return new ArrayList<>(items);
   }

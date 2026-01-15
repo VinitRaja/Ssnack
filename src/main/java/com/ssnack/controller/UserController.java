@@ -40,7 +40,7 @@ public class UserController{
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteUser(@PathVariable String id){
     boolean deleted = userService.deleteUser(id);
-    return deleted ? ResponseEntity.noContent().build : ResponseEntity.notFound().build();
+    return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
   }
   @PostMapping("/{userId}/items")
   public ResponseEntity<?> addItem(@PathVariable String userId, @RequestBody CreateItemRequest req){

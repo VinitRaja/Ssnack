@@ -28,7 +28,7 @@ public class ItemRepository implements JpaRepositoty<Item, String> {
     return new ArrayList<>(items);
   }
   public boolean existsById(List<Item> items, String id){
-    return items.stream().anyMatch(i->Objects.equals(i.getId, id));
+    return items.stream().anyMatch(i -> Objects.equals(i.getId(), id));
   }
   public long count (List<Item> items){
     return items.size();

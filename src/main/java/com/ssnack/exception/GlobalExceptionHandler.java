@@ -37,7 +37,7 @@ public class GlobalExceptionHandler{
     return ResponseEntity.status(status).body(body);
   }
   private Map<String, Object> baseBody(HttpStatus status, String message){
-    MAp<String, Object> body = new HashMap<>();
+    Map<String, Object> body = new HashMap<>();
     body.put("timestamp", Instant.now().toString());
     body.put("status", status.value());
     body.put("error", status.getReasonPhrase());

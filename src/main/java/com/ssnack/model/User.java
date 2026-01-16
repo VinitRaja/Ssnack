@@ -8,6 +8,11 @@ public class User{
   private String name;
   private final List<Item> items = new ArrayList<>();
 
+  public User(String id, String name) {
+        this.id = id;
+        this.name = name;
+  }
+
   public String getId() {
     return id;
   }

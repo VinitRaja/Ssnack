@@ -21,9 +21,8 @@ public interface UserServiceImpl{
   default Optional<User> getUser(String id, String name){
     return getUserRepository().findById(id).filter(u -> u.getName() != null && u.getName().equals(name));
   }
-  default User createUser(String name){
-    User user = new User();
-    user.setName(name);
+  default User createUser(String name, String id){
+    User user = new User(id, name);
     return getUserRepository().save(user);
   }
   default boolean deleteUser(String id){

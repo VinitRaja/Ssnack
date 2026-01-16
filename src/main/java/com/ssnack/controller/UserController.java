@@ -81,12 +81,12 @@ public class UserController{
   public ResponseEntity<Item> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
     try{
       Item item = userService.borrowItem(lenderId, itemId, borrowerId);
-      return new ResponseEntity<?>(item, HttpStatus.OK);
+      return new ResponseEntity<Item>(item, HttpStatus.OK);
     } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available: " + e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
   }
-  @PostMapping("/{borrowerId}/return/{borrowItemId}")
+  @PostMapping("/{borrowerId}/return/{borrowedItemId}")
   public ResponseEntity<Void> returnBorrowItem (@PathVariable String borrowerId, @PathVariable String borrowedItemId){
     try {
             boolean isReturned = userService.returnBorrowedItem(borrowerId, borrowedItemId);

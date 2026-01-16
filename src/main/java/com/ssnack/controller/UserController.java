@@ -78,10 +78,10 @@ public class UserController{
     }
   }
   @PostMapping("/{lenderId}/borrow/{itemId}/to/{borrowerId}")
-  public ResponseEntity<Item> borrowItem(@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
+  public ResponseEntity<Item> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
     try{
       Item item = userService.borrowItem(lenderId, itemId, borrowerId);
-      return new ResponseEntity<UserService>(item, HttpStatus.CREATED);
+      return new ResponseEntity<?>(item, HttpStatus.OK);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available: " + e.getMessage());
     }
@@ -99,7 +99,7 @@ public class UserController{
   public ResponseEntity<Item> sellBorrowedItem(@PathVariable String borrowerId, @PathVariable String borrowedItemId, @PathVariable String buyerId){
     try {
             Item item = userService.sellBorrowedItem(borrowerId, borrowedItemId, buyerId);
-            return new ResponseEntity<>(item, HttpStatus.OK);
+            return new ResponseEntity<?>(item, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             // Change the response to return a more appropriate type
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // or consider returning a custom error object

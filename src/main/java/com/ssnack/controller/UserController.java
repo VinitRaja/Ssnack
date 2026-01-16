@@ -88,21 +88,22 @@ public class UserController{
   }
   @PostMapping("/{borrowerId}/return/{borrowItemId}")
   public ResponseEntity<Void> returnBorrowItem (@PathVariable String borrowerId, @PathVariable String borrowedItemId){
-    try{
-      boolean ok = userService.returnBorrowedItem(borrowerId, borrowedItemId);
-      return ok ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
+    try {
+            boolean isReturned = userService.returnBorrowedItem(borrowerId, borrowedItemId);
+            return isReturned ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
   }
   @PostMapping("/{borrowerId}/sell-borrowed/{borrowedItemId}/to/{buyerId}")
   public ResponseEntity<Item> sellBorrowedItem(@PathVariable String borrowerId, @PathVariable String borrowedItemId, @PathVariable String buyerId){
-    try{
-      Item item = userService.sellBorrowedItem(borrowerId, borrowedItemId, buyerId);
-      return new ResponseEntity<>(item, HttpStatus.OK);
-    } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Not Available: " + e.getMessage());
-    }
+    try {
+            Item item = userService.sellBorrowedItem(borrowerId, borrowedItemId, buyerId);
+            return new ResponseEntity<>(item, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            // Change the response to return a more appropriate type
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // or consider returning a custom error object
+        }
   }
   public record CreateUserRequest(String name){}
   public record CreateItemRequest(String name){}

@@ -22,7 +22,7 @@ public class UserController{
   }
   @PostMapping
   public ResponseEntity<User> createUser(@RequestBody CreateUserRequest request){
-    User user = userService.createUser(request.name());
+    User user = userService.createUser(request.name(), java.util.UUID.randomUUID().toString());
     return new ResponseEntity<>(user, HttpStatus.CREATED);
   }
   @GetMapping("/{id}")
@@ -78,7 +78,7 @@ public class UserController{
     }
   }
   @PostMapping("/{lenderId}/borrow/{itemId}/to/{borrowerId}")
-  public ResponseEntity<?> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
+  public ResponseEntity<> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
     try{
       Item item = userService.borrowItem(lenderId, itemId, borrowerId);
       return new ResponseEntity<>(item, HttpStatus.OK);
@@ -99,7 +99,7 @@ public class UserController{
   public ResponseEntity<Item> sellBorrowedItem(@PathVariable String borrowerId, @PathVariable String borrowedItemId, @PathVariable String buyerId){
     try {
             Item item = userService.sellBorrowedItem(borrowerId, borrowedItemId, buyerId);
-            return new ResponseEntity<?>(item, HttpStatus.OK);
+            return new ResponseEntity<>(item, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             // Change the response to return a more appropriate type
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // or consider returning a custom error object

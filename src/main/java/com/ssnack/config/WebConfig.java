@@ -17,15 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
     @Value("${app.cors.allowed-headers}")
     private String allowedHeaders;
 
-    @Value("${app.cors.allowed-credentials}")
-    private boolean allowedCred;
-
     @Override
     public void addCorsMappings(CorsRegistry registry){
       registry.addMapping("/api/**")
               .allowedOrigins(allowedOrigins)
               .allowedMethods(allowedMethods)
-              .allowedHeaders(allowedHeaders)
-              .allowedCredentials(Boolean.toString(allowedCred));
+              .allowedHeaders(allowedHeaders);
     }
   }

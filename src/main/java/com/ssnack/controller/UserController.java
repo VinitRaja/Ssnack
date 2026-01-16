@@ -78,7 +78,7 @@ public class UserController{
     }
   }
   @PostMapping("/{lenderId}/borrow/{itemId}/to/{borrowerId}")
-  public ResponseEntity<> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
+  public ResponseEntity<?> borrowItem (@PathVariable String lenderId, @PathVariable String itemId, @PathVariable String borrowerId){
     try{
       Item item = userService.borrowItem(lenderId, itemId, borrowerId);
       return new ResponseEntity<>(item, HttpStatus.OK);

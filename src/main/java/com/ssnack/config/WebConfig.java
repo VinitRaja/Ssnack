@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
     private String allowedHeaders;
 
     @Value("${app.cors.allowed-credentials}")
-    private boolean allowedCredentials;
+    private boolean allowedCred;
 
     @Override
     public void addCorsMappings(CorsRegistry registry){
@@ -26,6 +26,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
               .allowedOrigins(allowedOrigins)
               .allowedMethods(allowedMethods)
               .allowedHeaders(allowedHeaders)
-              .allowedCredentials(Boolean.toString(allowedCredentials));
+              .allowedCredentials(Boolean.toString(allowedCred));
     }
   }
